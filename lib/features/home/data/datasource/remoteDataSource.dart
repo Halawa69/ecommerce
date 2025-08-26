@@ -12,39 +12,35 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   static const String baseUrl = "https://fakestoreapi.com/products";
   final http.Client client;
 
-  ProductRemoteDataSourceImpl({required this.client});
+  /// لو مش بعت client، هينشئ http.Client تلقائي
+  ProductRemoteDataSourceImpl({http.Client? client}) : client = client ?? http.Client();
+
+  /// دالة مساعدة عشان نعمل GET Requests
+  Future<List<dynamic>> _getJsonList(String url) async {
+    final response = await client.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as List;
+    } else {
+      throw Exception("Failed to load data from $url | StatusCode: ${response.statusCode}");
+    }
+  }
 
   @override
   Future<List<ProductModel>> getProducts({int limit = 50}) async {
-    final response = await client.get(Uri.parse('$baseUrl?limit=$limit'));
-    if (response.statusCode == 200) {
-      final List data = jsonDecode(response.body);
-      return data.map((json) => ProductModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to fetch products');
-    }
+    final data = await _getJsonList('$baseUrl?limit=$limit');
+    return data.map((json) => ProductModel.fromJson(json)).toList();
   }
 
   @override
   Future<List<ProductModel>> getProductsByCategory(String category) async {
     final encodedCategory = Uri.encodeComponent(category);
-    final response = await client.get(Uri.parse('$baseUrl/category/$encodedCategory'));
-    if (response.statusCode == 200) {
-      final List data = jsonDecode(response.body);
-      return data.map((json) => ProductModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to fetch products by category');
-    }
+    final data = await _getJsonList('$baseUrl/category/$encodedCategory');
+    return data.map((json) => ProductModel.fromJson(json)).toList();
   }
 
   @override
   Future<List<String>> getCategories() async {
-    final response = await client.get(Uri.parse('$baseUrl/categories'));
-    if (response.statusCode == 200) {
-      final List data = jsonDecode(response.body);
-      return data.map((e) => e.toString()).toList();
-    } else {
-      throw Exception('Failed to fetch categories');
-    }
+    final data = await _getJsonList('$baseUrl/categories');
+    return data.map((e) => e.toString()).toList();
   }
 }

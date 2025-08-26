@@ -22,22 +22,27 @@ import 'package:ecommerce/features/home/domain/usecase/getProductsbycatigaori.da
 import 'package:ecommerce/features/home/presentation/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http; // ضيف import
 
-Future<void> main(client) async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize your database for Cart/User
-  final db = await AppDatabase().database;
+  // Database instance
+  final db = AppDatabase().database;
+
+  // Local DataSources
+  final userLocalDataSource = UserLocalDataSourceImpl(db);
+  final cartLocalDataSource = CartLocalDataSourceImpl(db);
 
   // Repositories
-  final cartLocalDataSource = CartLocalDataSource();
-  final cartRepository = CartRepositoryImpl(cartLocalDataSource);
-  final userLocalDataSource = UserLocalDataSource();
   final userRepository = UserRepositoryImpl(userLocalDataSource);
+  final cartRepository = CartRepositoryImpl(cartLocalDataSource);
 
-  // API service for products
-  final productApiService = ProductRemoteDataSourceImpl(client: client);
-  final productRepository = ProductRepositoryImpl(productApiService, remoteDataSource: productApiService);
+
+  // Remote DataSource (API)
+  final productApiService = ProductRemoteDataSourceImpl(client: http.Client());
+  final productRepository =
+      ProductRepositoryImpl(productApiService, remoteDataSource: productApiService);
 
   runApp(
     MultiProvider(
