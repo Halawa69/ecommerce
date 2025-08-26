@@ -1,5 +1,6 @@
 import 'package:ecommerce/features/auth/presentation/page/signUp.dart';
 import 'package:ecommerce/features/auth/presentation/provider/userProvider.dart';
+import 'package:ecommerce/features/home/presentation/page/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -89,10 +90,10 @@ class Login extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Welcome ${user.username}! ✅")),
                             );
-                            // Navigator.push(
-                            //   context,
-                            //   // MaterialPageRoute(builder: (context) => const Home()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Home()),
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text("Invalid email or password ❌")),

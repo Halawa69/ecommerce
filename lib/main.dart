@@ -5,6 +5,7 @@ import 'package:ecommerce/features/auth/data/repo/user_repoimp.dart';
 import 'package:ecommerce/features/auth/domain/usecase/checkUser.dart';
 import 'package:ecommerce/features/auth/domain/usecase/checkUserLogin.dart';
 import 'package:ecommerce/features/auth/domain/usecase/insrtUser.dart';
+import 'package:ecommerce/features/auth/presentation/page/login.dart';
 import 'package:ecommerce/features/auth/presentation/provider/userProvider.dart';
 import 'package:ecommerce/features/cart/data/datasource/cart_dataSource.dart';
 import 'package:ecommerce/features/cart/data/repo/cart_repo_imp.dart';
@@ -22,7 +23,7 @@ import 'package:ecommerce/features/home/domain/usecase/getProductsbycatigaori.da
 import 'package:ecommerce/features/home/presentation/provider/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http; // ضيف import
+import 'package:http/http.dart' as http; 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,7 +84,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Getstart(),
+      home: const Login(),
     );
   }
 }

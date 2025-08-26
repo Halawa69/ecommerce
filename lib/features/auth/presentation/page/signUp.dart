@@ -109,8 +109,7 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: () async {
-                        () async {
+                    onPressed: () async {{
                         if (_key.currentState!.validate()) {
                           final userProvider = Provider.of<UserProvider>(context, listen: false);
                           final result = await userProvider.signUp();
@@ -125,7 +124,7 @@ class Signup extends StatelessWidget {
                             );
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Login()),
+                              MaterialPageRoute(builder: (context) => Login()),
                             );
                           }
                         }
