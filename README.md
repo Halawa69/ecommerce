@@ -1,16 +1,30 @@
-# ecommerce
+# 🛒 Flutter E-Commerce App
 
-A new Flutter project.
+A modern **E-Commerce mobile application** built with **Flutter** following **Clean Architecture principles**.  
+This project demonstrates best practices for building scalable, maintainable, and production-ready apps.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
+- ✅ **User Authentication** (Login & Signup)  
+- ✅ **Add to Cart** functionality  
+- ✅ **Search Products**  
+- ✅ **Filter by Categories**  
+- ✅ Clean Architecture with layered structure  
+- ✅ State management using **Provider**  
+- ✅ Local storage with **SharedPreferences** & **Sqflite**
+- 
+---
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📂 Project Structure
+```bash
+lib/
+│
+├── core/                # Reusable components & utilities
+├── features/            # Feature-based modules
+│   ├── auth/            # Authentication (Login & Signup)
+│   ├── cart/            # Cart management (Add to Cart, etc.)
+│   ├── home/            # Product listing, details, search & filters
+│   └── ...
+│
+└── main.dart            # Entry point
