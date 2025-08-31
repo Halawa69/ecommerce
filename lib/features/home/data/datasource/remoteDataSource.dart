@@ -12,10 +12,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   static const String baseUrl = "https://fakestoreapi.com/products";
   final http.Client client;
 
-  /// لو مش بعت client، هينشئ http.Client تلقائي
   ProductRemoteDataSourceImpl({http.Client? client}) : client = client ?? http.Client();
 
-  /// دالة مساعدة عشان نعمل GET Requests
   Future<List<dynamic>> _getJsonList(String url) async {
     final response = await client.get(Uri.parse(url));
     if (response.statusCode == 200) {
