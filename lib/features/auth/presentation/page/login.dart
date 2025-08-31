@@ -1,4 +1,3 @@
-import 'package:ecommerce/features/auth/presentation/page/signUp.dart';
 import 'package:ecommerce/features/auth/presentation/provider/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -132,12 +131,7 @@ class _LoginState extends State<Login> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Signup(),
-                            ),
-                          );
+                          context.go('/signup');
                         },
                         child: const Text(
                           "Sign up",

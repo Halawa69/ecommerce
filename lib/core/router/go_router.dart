@@ -11,13 +11,14 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   final GoRouter router = GoRouter(
+    initialLocation: '/login',
     routes: <RouteBase>[
       // ✅ Signup page with UserProvider
       GoRoute(
         path: '/signup',
         builder: (context, state) {
-          return ChangeNotifierProvider(
-            create: (_) => sl<UserProvider>(),
+          return ChangeNotifierProvider.value(
+            value: sl<UserProvider>(),
             child: const Signup(),
           );
         },
@@ -27,34 +28,15 @@ class AppRouter {
       GoRoute(
         path: '/login',
         builder: (context, state) {
-          return ChangeNotifierProvider(
-            create: (_) => sl<UserProvider>(),
+          return ChangeNotifierProvider.value(
+            value: sl<UserProvider>(),
             child: const Login(),
           );
         },
       ),
-
-      // ✅ Home page with ProductProvider
-      GoRoute(
-        path: '/home',
-        builder: (context, state) {
-          return ChangeNotifierProvider(
-            create: (_) => sl<ProductProvider>(),
-            child: const Home(),
-          );
-        },
-      ),
-
-      // ✅ Cart page with CartProvider
-      GoRoute(
-        path: '/cart',
-        builder: (context, state) {
-          return ChangeNotifierProvider(
-            create: (_) => sl<CartProvider>(),
-            child: Cart(),
-          );
-        },
-      ),
+      GoRoute(path: '/home', builder: (context, state) => Home()),
+      GoRoute(path: '/cart', builder: (context, state) => Cart()),
     ],
+    
   );
 }

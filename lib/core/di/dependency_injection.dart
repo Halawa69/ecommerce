@@ -63,7 +63,7 @@ sl.registerLazySingleton<CartRepository>(
 sl.registerLazySingleton<ProductRepository>(
     () => ProductRepositoryImpl(sl(), remoteDataSource: sl()));
 
-
+  
   // ✅ UseCases
   sl.registerLazySingleton(() => CheckUser(sl()));
   sl.registerLazySingleton(() => CheckUserLogin(sl()));

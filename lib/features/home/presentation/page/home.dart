@@ -17,15 +17,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      final productProvider = context.read<ProductProvider>();
-      productProvider.fetchProducts();
-      productProvider.fetchCategories();
-    });
-  }
+@override
+void initState() {
+  super.initState();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    final productProvider = context.read<ProductProvider>();
+    productProvider.fetchProducts();
+    productProvider.fetchCategories();
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +84,9 @@ class _HomeState extends State<Home> {
               'Hello ',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
+            // Prepare username and displayName before widget tree
             Text(
-              '${userProvider.username[0].toUpperCase()}${userProvider.username.substring(1)}',
+              '${userProvider.username?.isNotEmpty == true ? userProvider.username![0].toUpperCase() + userProvider.username!.substring(1) : 'Guest'}',
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
