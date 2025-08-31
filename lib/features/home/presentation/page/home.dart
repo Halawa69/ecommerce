@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 
 import 'package:ecommerce/core/reuseable/productSearchDelegate.dart';
 import 'package:ecommerce/features/auth/presentation/provider/userProvider.dart';
-import 'package:ecommerce/features/cart/presentation/page/cartPage.dart';
 import 'package:ecommerce/features/cart/presentation/provider/cart_provider.dart';
 import 'package:ecommerce/features/home/domain/entities/product.dart';
 import 'package:ecommerce/features/home/presentation/provider/product_provider.dart';
@@ -99,10 +99,7 @@ class _HomeState extends State<Home> {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Cart()),
-                );
+                context.push('/cart');
               },
               icon: const Icon(
                 Icons.shopping_cart,

@@ -1,7 +1,7 @@
 import 'package:ecommerce/features/auth/presentation/page/signUp.dart';
 import 'package:ecommerce/features/auth/presentation/provider/userProvider.dart';
-import 'package:ecommerce/features/home/presentation/page/home.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -103,10 +103,7 @@ class _LoginState extends State<Login> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("Welcome ${user.username}! ✅")),
                           );
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const Home()),
-                          );
+                          context.go('/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Invalid email or password ❌")),

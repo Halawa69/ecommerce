@@ -57,7 +57,7 @@ sl.registerSingletonWithDependencies<CartLocalDataSource>(
 
 // ✅ Repositories
 sl.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(sl()));
+    () => UserRepositoryImpl(dataSource: sl()));
 sl.registerLazySingleton<CartRepository>(
     () => CartRepositoryImpl(sl()));
 sl.registerLazySingleton<ProductRepository>(

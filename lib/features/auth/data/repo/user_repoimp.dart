@@ -6,7 +6,7 @@ import '../models/user_model.dart';
 class UserRepositoryImpl implements UserRepository {
   final UserLocalDataSource dataSource;
 
-  UserRepositoryImpl(this.dataSource);
+  UserRepositoryImpl({required this.dataSource});
 
   @override
   Future<int> insertUser(User user) async {

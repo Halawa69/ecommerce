@@ -1,5 +1,6 @@
 import 'package:ecommerce/features/cart/presentation/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Cart extends StatelessWidget {
@@ -20,7 +21,7 @@ class Cart extends StatelessWidget {
                   size: 30,
                   color: Color(0xFF6200EE),
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => context.pop('/home'),
               ),
             ),
             // Items list

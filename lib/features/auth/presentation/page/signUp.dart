@@ -1,7 +1,6 @@
-
-import 'package:ecommerce/features/auth/presentation/page/login.dart';
 import 'package:ecommerce/features/auth/presentation/provider/userProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Signup extends StatelessWidget {
@@ -122,10 +121,7 @@ class Signup extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Signup successful! ✅")),
                           );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Login()),
-                          );
+                          context.go('/login');
                         }
                       }
                     },
@@ -141,7 +137,7 @@ class Signup extends StatelessWidget {
                       const Text("Already have an account?", style: TextStyle(fontSize: 16)),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                          context.go('/login');
                         },
                         child: const Text(
                           "Log in",
