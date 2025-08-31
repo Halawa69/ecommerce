@@ -4,7 +4,7 @@ import '../../domain/entities/user.dart';
 import '../../domain/usecase/checkUser.dart';
 import '../../domain/usecase/checkUserLogin.dart';
 
-class UserProvider with ChangeNotifier {
+class UserProvider extends ChangeNotifier {
   final CheckUser checkUserUseCase;
   final CheckUserLogin checkUserLoginUseCase;
   final InsertUser insertUserUseCase;

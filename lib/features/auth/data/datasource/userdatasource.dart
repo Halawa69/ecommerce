@@ -1,41 +1,37 @@
+import 'package:ecommerce/features/auth/data/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
-import '../models/user_model.dart';
 
 abstract class UserLocalDataSource {
   Future<int> insertUser(UserModel user);
   Future<UserModel?> getUser();
   Future<UserModel?> checkUser(String email, String username);
   Future<UserModel?> checkUserLogin(String email, String password);
-  Future<int> clearUsers();
+  Future<int> clearUsers(); // استخدمها بس في logout مش في init
 }
-
 class UserLocalDataSourceImpl implements UserLocalDataSource {
-  final Future<Database> db;
+  final Database db;
 
   UserLocalDataSourceImpl(this.db);
 
   @override
   Future<int> insertUser(UserModel user) async {
-    final dbClient = await db;
-    return await dbClient.insert(
+    return await db.insert(
       'users',
       user.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      conflictAlgorithm: ConflictAlgorithm.abort, // ما يمسحش القديم
     );
   }
 
   @override
   Future<UserModel?> getUser() async {
-    final dbClient = await db;
-    final result = await dbClient.query('users', limit: 1);
+    final result = await db.query('users', limit: 1);
     if (result.isNotEmpty) return UserModel.fromMap(result.first);
     return null;
   }
 
   @override
   Future<UserModel?> checkUser(String email, String username) async {
-    final dbClient = await db;
-    final res = await dbClient.query(
+    final res = await db.query(
       'users',
       where: 'email = ? OR username = ?',
       whereArgs: [email, username],
@@ -46,8 +42,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<UserModel?> checkUserLogin(String email, String password) async {
-    final dbClient = await db;
-    final res = await dbClient.query(
+    final res = await db.query(
       'users',
       where: 'email = ? AND password = ?',
       whereArgs: [email, password],
@@ -58,7 +53,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<int> clearUsers() async {
-    final dbClient = await db;
-    return await dbClient.delete('users');
+    // استخدمها بس في logout مش في init
+    return await db.delete('users');
   }
 }

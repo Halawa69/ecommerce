@@ -21,7 +21,7 @@ abstract class CartLocalDataSource {
 
 class CartLocalDataSourceImpl implements CartLocalDataSource {
   CartLocalDataSourceImpl(this.db);
-  final Future<Database> db;
+  final Database db;
   
   final _streamController = StreamController<List<CartModel>>.broadcast();
   @override

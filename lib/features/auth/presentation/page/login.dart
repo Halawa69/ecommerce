@@ -4,14 +4,27 @@ import 'package:ecommerce/features/home/presentation/page/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final _key = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _key = GlobalKey<FormState>();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -78,29 +91,29 @@ class Login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                      onPressed: () async {
-                        if (_key.currentState!.validate()) {
-                          final userProvider = Provider.of<UserProvider>(context, listen: false);
-                          final user = await userProvider.login(
-                            emailController.text.trim(),
-                            passwordController.text.trim(),
-                          );
+                    onPressed: () async {
+                      if (_key.currentState!.validate()) {
+                        final userProvider = context.read<UserProvider>();
+                        final user = await userProvider.login(
+                          emailController.text.trim(),
+                          passwordController.text.trim(),
+                        );
 
-                          if (user != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Welcome ${user.username}! ✅")),
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Home()),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Invalid email or password ❌")),
-                            );
-                          }
+                        if (user != null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Welcome ${user.username}! ✅")),
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const Home()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Invalid email or password ❌")),
+                          );
                         }
-                      },
+                      }
+                    },
                     child: const Text(
                       "Log in",
                       style: TextStyle(

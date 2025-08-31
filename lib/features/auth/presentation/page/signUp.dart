@@ -109,26 +109,25 @@ class Signup extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: () async {{
-                        if (_key.currentState!.validate()) {
-                          final userProvider = Provider.of<UserProvider>(context, listen: false);
-                          final result = await userProvider.signUp();
+                    onPressed: () async {
+                      if (_key.currentState!.validate()) {
+                        final userProvider = Provider.of<UserProvider>(context, listen: false);
+                        final result = await userProvider.signUp();
 
-                          if (result == "User already exists") {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("You already have an account")),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Signup successful! ✅")),
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Login()),
-                            );
-                          }
+                        if (result == "User already exists") {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("You already have an account")),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Signup successful! ✅")),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Login()),
+                          );
                         }
-                      };
+                      }
                     },
                     child: const Text(
                       "Sign up",
