@@ -13,7 +13,6 @@ This project demonstrates best practices for building scalable, maintainable, an
 - ✅ Clean Architecture with layered structure  
 - ✅ State management using **Provider**  
 - ✅ Local storage with **SharedPreferences** & **Sqflite**
-- 
 ---
 
 ## 📂 Project Structure
